@@ -88,22 +88,46 @@ const doesFileExist = (filePath) => {
   }
 };
 
-try {
-  /* Check if the file for `html` build exists in system or not */
-  if (doesFileExist(buildPathHtml)) {
-    console.log("Deleting old build file");
-    /* If the file exists delete the file from system */
-    fs.unlinkSync(buildPathHtml);
+// try {
+//   /* Check if the file for `html` build exists in system or not */
+//   if (doesFileExist(buildPathHtml)) {
+//     console.log("Deleting old build file");
+//     /* If the file exists delete the file from system */
+//     fs.unlinkSync(buildPathHtml);
+//   }
+//   /* generate rows */
+//   const rows = data.map(createRow).join("");
+//   /* generate table */
+//   const table = createTable(rows);
+//   /* generate html */
+//   const html = createHtml(table);
+//   /* write the generated html to file */
+//   fs.writeFileSync(buildPathHtml, html);
+//   console.log("Succesfully created an HTML table");
+// } catch (error) {
+//   console.log("Error generating table", error);
+// }
+
+let prov = function executeProv() {
+  try {
+    /* Check if the file for `html` build exists in system or not */
+    if (doesFileExist(buildPathHtml)) {
+      console.log("Deleting old build file");
+      /* If the file exists delete the file from system */
+      fs.unlinkSync(buildPathHtml);
+    }
+    /* generate rows */
+    const rows = data.map(createRow).join("");
+    /* generate table */
+    const table = createTable(rows);
+    /* generate html */
+    const html = createHtml(table);
+    /* write the generated html to file */
+    fs.writeFileSync(buildPathHtml, html);
+    console.log("Succesfully created an HTML table");
+  } catch (error) {
+    console.log("Error generating table", error);
   }
-  /* generate rows */
-  const rows = data.map(createRow).join("");
-  /* generate table */
-  const table = createTable(rows);
-  /* generate html */
-  const html = createHtml(table);
-  /* write the generated html to file */
-  fs.writeFileSync(buildPathHtml, html);
-  console.log("Succesfully created an HTML table");
-} catch (error) {
-  console.log("Error generating table", error);
-}
+};
+
+module.exports.prov = prov;

@@ -19,9 +19,9 @@ const { buildPathHtml } = require("./buildPaths");
 
 const createRow = (item) => `
   <tr>
-    <td>${item.idcliente}</td>
-    <td>${item.nombrecompania}</td>
-    <td>${item.nombrecontacto}</td>
+    <td>${item.idCliente}</td>
+    <td>${item.NombreCompania}</td>
+    <td>${item.NombreContacto}</td>
   </tr>
 `;
 
@@ -88,7 +88,27 @@ const doesFileExist = (filePath) => {
   }
 };
 
-export default function executeClientes() {
+// try {
+//   /* Check if the file for `html` build exists in system or not */
+//   if (doesFileExist(buildPathHtml)) {
+//     console.log("Deleting old build file");
+//     /* If the file exists delete the file from system */
+//     fs.unlinkSync(buildPathHtml);
+//   }
+//   /* generate rows */
+//   const rows = data.map(createRow).join("");
+//   /* generate table */
+//   const table = createTable(rows);
+//   /* generate html */
+//   const html = createHtml(table);
+//   /* write the generated html to file */
+//   fs.writeFileSync(buildPathHtml, html);
+//   console.log("Succesfully created an HTML table");
+// } catch (error) {
+//   console.log("Error generating table", error);
+// }
+
+let cli = function executeCli() {
   try {
     /* Check if the file for `html` build exists in system or not */
     if (doesFileExist(buildPathHtml)) {
@@ -108,4 +128,6 @@ export default function executeClientes() {
   } catch (error) {
     console.log("Error generating table", error);
   }
-}
+};
+
+module.exports.cli = cli;

@@ -4,6 +4,10 @@ const http = require("http");
 
 const axios = require("axios");
 
+let proveedor = require("./createTableProveedores");
+
+let cliente = require("./createTableClientes");
+
 http
   .createServer((req, res) => {
     res.writeHead(200, {
@@ -21,18 +25,33 @@ http
           let respuesta = JSON.stringify(resp.data, null, 2);
           fs.writeFile("proveedores.json", respuesta, "utf8", () => {
             console.log("Json de proveedores escrito correctamente");
+            proveedor.prov();
+            const html = fs.readFileSync(__dirname + "/build.html", "utf8");
+            res.end(html);
           });
         })
         .catch((err) => {
           // Manejo de error
           console.error(err);
         });
-
-      const html = fs.readFileSync(__dirname + "/build.html", "utf8");
-      res.end(html);
-    } else if (url == "/api/cliente") {
-      const html = fs.readFileSync(__dirname + "/build.html", "utf8");
-      res.end(html);
+    } else if (url == "/api/clientes") {
+      axios
+        .get(
+          "https://gist.githubusercontent.com/josejbocanegra/986182ce2dd3e6246adcf960f9cda061/raw/f013c156f37c34117c0d4ba9779b15d427fb8dcd/clientes.json"
+        )
+        .then((resp) => {
+          let respuesta = JSON.stringify(resp.data, null, 2);
+          fs.writeFile("clientes.json", respuesta, "utf8", () => {
+            console.log("Json de clientes escrito correctamente");
+            cliente.cli();
+            const html = fs.readFileSync(__dirname + "/build.html", "utf8");
+            res.end(html);
+          });
+        })
+        .catch((err) => {
+          // Manejo de error
+          console.error(err);
+        });
     }
 
     const html = fs.readFileSync(__dirname + "/build.html", "utf8");
