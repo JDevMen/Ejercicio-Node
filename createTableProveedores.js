@@ -1,6 +1,5 @@
 const fs = require("fs");
-// JSON data
-const data = require("./proveedores.json");
+
 // Build paths
 const { buildPathHtml } = require("./buildPaths");
 
@@ -116,6 +115,8 @@ let prov = function executeProv() {
       /* If the file exists delete the file from system */
       fs.unlinkSync(buildPathHtml);
     }
+    // JSON data
+    const data = require("./proveedores.json");
     /* generate rows */
     const rows = data.map(createRow).join("");
     /* generate table */

@@ -1,6 +1,5 @@
 const fs = require("fs");
-// JSON data
-const data = require("./clientes.json");
+
 // Build paths
 const { buildPathHtml } = require("./buildPaths");
 
@@ -116,6 +115,9 @@ let cli = function executeCli() {
       /* If the file exists delete the file from system */
       fs.unlinkSync(buildPathHtml);
     }
+
+    // JSON data
+    const data = require("./clientes.json");
     /* generate rows */
     const rows = data.map(createRow).join("");
     /* generate table */
