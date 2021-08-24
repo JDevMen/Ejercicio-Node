@@ -1,5 +1,3 @@
-import { executeProveedores } from "./createTableProveedores.js";
-
 const fs = require("fs");
 
 const http = require("http");
@@ -23,10 +21,6 @@ http
           let respuesta = JSON.stringify(resp.data, null, 2);
           fs.writeFile("proveedores.json", respuesta, "utf8", () => {
             console.log("Json de proveedores escrito correctamente");
-          });
-
-          $.getScript("createTableClientes.js", () => {
-            console.log("Exito cambiando build.html");
           });
         })
         .catch((err) => {
